@@ -5,23 +5,6 @@ import ContactCard from './components/ContactCard';
 import AddContactForm from './components/AddContactForm';
 import AddEditForm from './components/AddEditForm';
 
-/*
-  Contact Manager
-
-  Application to keep a contact book with people and their information.
-
-  Data about contacts:
-    Id
-    Name
-    Email
-    Phone
-    Notes
-    Company
-    When you met
-
-
-*/
-
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -89,12 +72,6 @@ export default class App extends Component {
     let selectContactIndex = this.state.contacts.findIndex(
       contact => contact.id === updateContact.id
     );
-
-    // for( let i = 0; i < this.state.contacts.length; i++) {
-    //   if (updateContact.id === this.state.contacts[i].id) {
-    //     selectContactIndex = i;
-    //   }
-    // }
 
     // replace them
     const contactsArry = this.state.contacts;

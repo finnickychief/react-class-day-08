@@ -34,12 +34,4 @@ Input.defaultProps = {
   placeholder: '. . .'
 };
 
-/*
-  Label
-  type
-  onChange
-  value
-  placeholder
-*/
-
 export default Input;

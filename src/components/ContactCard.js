@@ -15,10 +15,6 @@ export default class ContactCard extends Component {
   }
 
   toggleDetails = () => {
-    // this.state.visible
-    //   ? this.setState({ visible: false })
-    //   : this.setState({ visible: true });
-
     this.setState({ visible: !this.state.visible });
   };
 

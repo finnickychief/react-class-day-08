@@ -48,13 +48,6 @@ const Navbar = props => {
   );
 };
 
-// syntax for propTypes:
-/*
-ComponentName.propTypes = {
-  List of props within as keys to the object, and the type you expect it to be on the right
-  propName: PropTypes.type
-}
-*/
 Navbar.propTypes = {
   switchRouteChild: PropTypes.func.isRequired
 };
