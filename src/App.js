@@ -4,55 +4,8 @@ import uuid from 'uuid';
 import ContactCard from './components/ContactCard';
 import AddContactForm from './components/AddContactForm';
 import AddEditForm from './components/AddEditForm';
-
+import ContextTest from './components/ContextTest';
 export default class App extends Component {
-  onSubmit = newContact => {
-    //const newContacts = this.state.contacts.concat([newContact]);
-
-    const newContacts = this.state.contacts;
-    newContacts.push(newContact);
-
-    this.setState({ contacts: newContacts });
-    this.switchRouteParent('viewContacts');
-  };
-
-  onEditSubmit = updateContact => {
-    // find item to update
-
-    let selectContactIndex = this.state.contacts.findIndex(
-      contact => contact.id === updateContact.id
-    );
-
-    // replace them
-    const contactsArry = this.state.contacts;
-
-    contactsArry[selectContactIndex] = updateContact;
-
-    // update state
-
-    this.setState({ contacts: contactsArry });
-    this.switchRouteParent('viewContacts');
-  }; // end onEditSubmit
-
-  goToEdit = contact => {
-    this.setState({ currentContact: contact });
-
-    // Route to AddEditForm
-    this.switchRouteParent('AddEditForm');
-  };
-
-  deleteContact = contact => {
-    const newArray = this.state.contacts;
-    let selectContactIndex;
-    for (let i = 0; i < this.state.contacts.length; i++) {
-      if (contact.id === this.state.contacts[i].id) {
-        selectContactIndex = i;
-      }
-    }
-    newArray.splice(selectContactIndex, 1);
-    this.setState({ contacts: newArray });
-  };
-
   render() {
     let element;
 
@@ -64,7 +17,7 @@ export default class App extends Component {
               <ContactCard
                 contact={contact}
                 key={contact.id}
-                goToEdit={this.goToEdit}
+                goToEdit={true}
                 deleteContact={true}
                 dispatch={this.props.dispatch}
               />
@@ -78,8 +31,8 @@ export default class App extends Component {
       case 'AddEditForm':
         element = (
           <AddEditForm
-            onSubmitParent={this.onEditSubmit}
-            contact={this.state.currentContact}
+            dispatch={this.props.context.dispatch}
+            contact={this.props.context.currentContact}
           />
         );
         break;
@@ -91,6 +44,7 @@ export default class App extends Component {
       <div>
         <Navbar dispatch={this.props.dispatch} />
         <div className="container">{element}</div>
+        <ContextTest hello={'hi'} style={{ backgroundColor: 'green' }} />
       </div>
     );
   }

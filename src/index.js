@@ -9,7 +9,14 @@ ReactDOM.render(
     <Consumer>
       {store => {
         const { dispatch, route, contacts } = store;
-        return <App dispatch={dispatch} route={route} contacts={contacts} />;
+        return (
+          <App
+            dispatch={dispatch}
+            route={route}
+            contacts={contacts}
+            context={store}
+          />
+        );
       }}
     </Consumer>
   </Provider>,

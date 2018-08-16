@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Input from './Input';
-import PropTypes from 'prop-types'
-
+import PropTypes from 'prop-types';
 
 class AddEditForm extends Component {
   constructor(props) {
@@ -22,11 +21,18 @@ class AddEditForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const {id, name, email, phone, company, dateMet, notes } = this.state;
+    const { id, name, email, phone, company, dateMet, notes } = this.state;
 
-    const updateContact = {id, name, email, phone, company, dateMet, notes };
+    const updateContact = { id, name, email, phone, company, dateMet, notes };
 
-    this.props.onSubmitParent(updateContact);
+    this.props.dispatch({
+      type: 'UPDATE_CONTACT',
+      payload: updateContact
+    });
+    this.props.dispatch({
+      type: 'CHANGE_ROUTE',
+      payload: 'viewContacts'
+    });
   };
 
   render() {
@@ -83,8 +89,7 @@ class AddEditForm extends Component {
 }
 
 AddEditForm.propTypes = {
-    contact: PropTypes.object.isRequired,
-    onSubmitParent: PropTypes.func.isRequired
-  };
+  contact: PropTypes.object.isRequired
+};
 
 export default AddEditForm;

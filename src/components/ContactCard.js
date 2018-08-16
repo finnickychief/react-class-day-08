@@ -18,6 +18,20 @@ export default class ContactCard extends Component {
     this.setState({ visible: !this.state.visible });
   };
 
+  editHandler = () => {
+    // Load the current user into the store
+    this.props.dispatch({
+      type: 'SET_CONTACT',
+      payload: this.props.contact
+    });
+
+    // Change the route to Edit Form
+    this.props.dispatch({
+      type: 'CHANGE_ROUTE',
+      payload: 'AddEditForm'
+    });
+  };
+
   render() {
     const { contact } = this.props;
 
@@ -44,10 +58,7 @@ export default class ContactCard extends Component {
               <strong>Notes:</strong> {contact.notes}
             </p>
             {this.props.goToEdit && (
-              <button
-                className="btn btn-warning"
-                onClick={this.props.goToEdit.bind(this, contact)}
-              >
+              <button className="btn btn-warning" onClick={this.editHandler}>
                 Update Contact
               </button>
             )}
