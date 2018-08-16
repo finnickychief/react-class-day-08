@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import PropTypes from 'prop-types';
+import { updateContact } from '../actions';
 
 class AddEditForm extends Component {
   constructor(props) {
@@ -21,22 +22,14 @@ class AddEditForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { id, name, email, phone, company, dateMet, notes } = this.state;
+    const { id, name, email, phone, company } = this.state;
+    const updatedContact = { id, name, email, phone, company };
 
-    const updateContact = { id, name, email, phone, company, dateMet, notes };
-
-    this.props.dispatch({
-      type: 'UPDATE_CONTACT',
-      payload: updateContact
-    });
-    this.props.dispatch({
-      type: 'CHANGE_ROUTE',
-      payload: 'viewContacts'
-    });
+    updateContact(id, updatedContact, this.props.dispatch);
   };
 
   render() {
-    const { name, email, phone, company, dateMet, notes } = this.state;
+    const { name, email, phone, company } = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -66,19 +59,6 @@ class AddEditForm extends Component {
             name="phone"
             placeholder="555-555-5555"
             value={phone}
-            onChange={this.onChange}
-          />
-          <Input
-            label="dateMet"
-            name="dateMet"
-            placeholder="mm/dd/yyyy"
-            value={dateMet}
-            onChange={this.onChange}
-          />
-          <Input
-            label="Notes"
-            name="notes"
-            value={notes}
             onChange={this.onChange}
           />
           <button className="btn btn-success">Update Contact</button>

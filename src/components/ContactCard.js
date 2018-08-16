@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { deleteContact } from '../actions';
 
 /*
   Create a contact card to represent each person.
@@ -51,12 +52,6 @@ export default class ContactCard extends Component {
             <p>
               <strong>Email:</strong> {contact.email}
             </p>
-            <p>
-              <strong>Met:</strong> {contact.dateMet}
-            </p>
-            <p>
-              <strong>Notes:</strong> {contact.notes}
-            </p>
             {this.props.goToEdit && (
               <button className="btn btn-warning" onClick={this.editHandler}>
                 Update Contact
@@ -65,10 +60,11 @@ export default class ContactCard extends Component {
             {this.props.deleteContact && (
               <button
                 className="btn btn-danger"
-                onClick={this.props.dispatch.bind(this, {
-                  type: 'DELETE_CONTACT',
-                  payload: contact.id
-                })}
+                onClick={deleteContact.bind(
+                  this,
+                  contact.id,
+                  this.props.dispatch
+                )}
               >
                 Delete
               </button>
@@ -82,6 +78,6 @@ export default class ContactCard extends Component {
 
 ContactCard.propTypes = {
   contact: PropTypes.object.isRequired,
-  goToEdit: PropTypes.func,
+  goToEdit: PropTypes.bool,
   deleteContact: PropTypes.bool
 };

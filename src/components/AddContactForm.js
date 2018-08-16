@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
 import PropTypes from 'prop-types';
-import uuid from 'uuid';
+import { addContact } from '../actions';
 
 class AddContactForm extends Component {
   constructor(props) {
@@ -10,9 +10,7 @@ class AddContactForm extends Component {
       name: '',
       email: '',
       phone: '',
-      company: '',
-      dateMet: '',
-      notes: ''
+      company: ''
     };
   }
 
@@ -21,23 +19,14 @@ class AddContactForm extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { name, email, phone, company, dateMet, notes } = this.state;
-    const id = uuid();
-    const newContact = { id, name, email, phone, company, dateMet, notes };
+    const { name, email, phone, company } = this.state;
+    const newContact = { name, email, phone, company };
 
-    this.props.dispatch({
-      type: 'ADD_CONTACT',
-      payload: newContact
-    });
-
-    this.props.dispatch({
-      type: 'CHANGE_ROUTE',
-      payload: 'viewContacts'
-    });
+    addContact(newContact, this.props.dispatch);
   };
 
   render() {
-    const { name, email, phone, company, dateMet, notes } = this.state;
+    const { name, email, phone, company } = this.state;
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -67,19 +56,6 @@ class AddContactForm extends Component {
             name="phone"
             placeholder="555-555-5555"
             value={phone}
-            onChange={this.onChange}
-          />
-          <Input
-            label="dateMet"
-            name="dateMet"
-            placeholder="mm/dd/yyyy"
-            value={dateMet}
-            onChange={this.onChange}
-          />
-          <Input
-            label="Notes"
-            name="notes"
-            value={notes}
             onChange={this.onChange}
           />
           <button className="btn btn-success">Add Contact</button>
