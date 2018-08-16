@@ -28,7 +28,10 @@ const Navbar = props => {
             <a
               className="nav-link"
               style={linkStyle}
-              onClick={props.switchRouteChild.bind(this, 'viewContacts')}
+              onClick={props.dispatch.bind(this, {
+                type: 'CHANGE_ROUTE',
+                payload: 'viewContacts'
+              })}
             >
               View <span className="sr-only">(current)</span>
             </a>
@@ -37,7 +40,10 @@ const Navbar = props => {
             <a
               className="nav-link"
               style={linkStyle}
-              onClick={props.switchRouteChild.bind(this, 'addContact')}
+              onClick={props.dispatch.bind(this, {
+                type: 'CHANGE_ROUTE',
+                payload: 'addContact'
+              })}
             >
               Add
             </a>
