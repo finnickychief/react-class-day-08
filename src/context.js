@@ -7,7 +7,10 @@ const Context = React.createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case 'CHANGE_ROUTE':
-      return { ...state, route: action.payload };
+      return {
+        ...state,
+        route: action.payload
+      };
     default:
       return state;
   }

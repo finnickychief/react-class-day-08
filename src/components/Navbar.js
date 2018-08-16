@@ -54,8 +54,4 @@ const Navbar = props => {
   );
 };
 
-Navbar.propTypes = {
-  switchRouteChild: PropTypes.func.isRequired
-};
-
 export default Navbar;

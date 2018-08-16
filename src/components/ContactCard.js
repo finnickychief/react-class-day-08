@@ -20,27 +20,6 @@ export default class ContactCard extends Component {
 
   render() {
     const { contact } = this.props;
-    let element;
-    if (this.state.visible) {
-      element = (
-        <div className="card-body">
-          <p>
-            <strong>Phone:</strong> {contact.phone}
-          </p>
-          <p>
-            <strong>Email:</strong> {contact.email}
-          </p>
-          <p>
-            <strong>Met:</strong> {contact.dateMet}
-          </p>
-          <p>
-            <strong>Notes:</strong> {contact.notes}
-          </p>
-        </div>
-      );
-    } else {
-      element = null;
-    }
 
     return (
       <div className="card">
@@ -75,7 +54,10 @@ export default class ContactCard extends Component {
             {this.props.deleteContact && (
               <button
                 className="btn btn-danger"
-                onClick={this.props.deleteContact.bind(this, contact)}
+                onClick={this.props.dispatch.bind(this, {
+                  type: 'DELETE_CONTACT',
+                  payload: contact.id
+                })}
               >
                 Delete
               </button>

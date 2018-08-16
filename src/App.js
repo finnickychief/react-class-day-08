@@ -6,10 +6,6 @@ import AddContactForm from './components/AddContactForm';
 import AddEditForm from './components/AddEditForm';
 
 export default class App extends Component {
-  switchRouteParent = route => {
-    this.setState({ route: route });
-  };
-
   onSubmit = newContact => {
     //const newContacts = this.state.contacts.concat([newContact]);
 
@@ -69,7 +65,8 @@ export default class App extends Component {
                 contact={contact}
                 key={contact.id}
                 goToEdit={this.goToEdit}
-                deleteContact={this.deleteContact}
+                deleteContact={true}
+                dispatch={this.props.dispatch}
               />
             ))}
           </div>
