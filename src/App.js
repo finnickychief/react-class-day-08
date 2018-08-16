@@ -5,28 +5,32 @@ import ContactCard from './components/ContactCard';
 import AddContactForm from './components/AddContactForm';
 import AddEditForm from './components/AddEditForm';
 import ContextTest from './components/ContextTest';
-export default class App extends Component {
+import consumerWrapper from './components/consumerWrapper';
+
+class App extends Component {
   render() {
     let element;
 
-    switch (this.props.route) {
+    const { dispatch, contacts } = this.props.context;
+
+    switch (this.props.context.route) {
       case 'viewContacts':
         element = (
           <div>
-            {this.props.contacts.map(contact => (
+            {contacts.map(contact => (
               <ContactCard
                 contact={contact}
                 key={contact.id}
                 goToEdit={true}
                 deleteContact={true}
-                dispatch={this.props.dispatch}
+                dispatch={dispatch}
               />
             ))}
           </div>
         );
         break;
       case 'addContact':
-        element = <AddContactForm dispatch={this.props.dispatch} />;
+        element = <AddContactForm dispatch={dispatch} />;
         break;
       case 'AddEditForm':
         element = (
@@ -42,10 +46,12 @@ export default class App extends Component {
 
     return (
       <div>
-        <Navbar dispatch={this.props.dispatch} />
+        <Navbar dispatch={dispatch} />
         <div className="container">{element}</div>
         <ContextTest hello={'hi'} style={{ backgroundColor: 'green' }} />
       </div>
     );
   }
 }
+
+export default consumerWrapper(App);
