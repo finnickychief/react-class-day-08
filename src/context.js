@@ -6,6 +6,19 @@ const Context = React.createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'ADD_CONTACT':
+      return {
+        ...state,
+        contacts: [action.payload, ...state.contacts]
+      };
+    case 'DELETE_CONTACT':
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          // Grab all contacts that are NOT the one we're trying to delete.
+          contact => contact.id !== action.payload
+        )
+      };
     case 'CHANGE_ROUTE':
       return {
         ...state,
@@ -59,6 +72,9 @@ export class Provider extends React.Component {
     ],
     route: 'viewContacts',
 
+    // The dispatch is part of the store and is what provides access to the reducer
+    // To be able to modify the store, you need access to the store.
+    // The reason for this is because the reducer requires the state of the store, and the only way to see the state is to be within the component that holds it. In this case, that is the Provider
     dispatch: action => this.setState(state => reducer(state, action))
   };
 

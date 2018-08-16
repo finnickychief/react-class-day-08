@@ -72,5 +72,5 @@ export default class ContactCard extends Component {
 ContactCard.propTypes = {
   contact: PropTypes.object.isRequired,
   goToEdit: PropTypes.func,
-  deleteContact: PropTypes.func
+  deleteContact: PropTypes.bool
 };

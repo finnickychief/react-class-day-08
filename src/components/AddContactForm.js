@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input from './Input';
-import PropTypes from 'prop-types'
-
+import PropTypes from 'prop-types';
+import uuid from 'uuid';
 
 class AddContactForm extends Component {
   constructor(props) {
@@ -22,10 +22,18 @@ class AddContactForm extends Component {
     e.preventDefault();
 
     const { name, email, phone, company, dateMet, notes } = this.state;
+    const id = uuid();
+    const newContact = { id, name, email, phone, company, dateMet, notes };
 
-    const newContact = { name, email, phone, company, dateMet, notes };
+    this.props.dispatch({
+      type: 'ADD_CONTACT',
+      payload: newContact
+    });
 
-    this.props.onSubmitParent(newContact);
+    this.props.dispatch({
+      type: 'CHANGE_ROUTE',
+      payload: 'viewContacts'
+    });
   };
 
   render() {
@@ -80,9 +88,5 @@ class AddContactForm extends Component {
     );
   }
 }
-
-AddContactForm.propTypes = {
-  onSubmitParent: PropTypes.func.isRequired
-};
 
 export default AddContactForm;

@@ -73,7 +73,7 @@ export default class App extends Component {
         );
         break;
       case 'addContact':
-        element = <AddContactForm onSubmitParent={this.onSubmit} />;
+        element = <AddContactForm dispatch={this.props.dispatch} />;
         break;
       case 'AddEditForm':
         element = (
